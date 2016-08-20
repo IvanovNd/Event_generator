@@ -1,6 +1,8 @@
 package event;
 
 
+import event.enums.EventType;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,13 +22,14 @@ public class Event {
     private String endReason;
     private String originationChannel;
 
+    public Event() {
+        this.id = UUID.randomUUID();
+        this.eventType = EventType.START.name();
+        this.createTime = new Date();
+    }
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getEventType() {
@@ -47,10 +50,6 @@ public class Event {
 
     public Date getCreateTime() {
         return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public Date getDeliveryTime() {

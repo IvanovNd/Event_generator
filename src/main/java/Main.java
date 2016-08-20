@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -20,11 +20,10 @@ public class Main {
         System.out.println(uuid);
         System.out.println(UUID.randomUUID());
         System.out.println(UUID.randomUUID());
-
+        Random random = new Random(4);
+        random.nextInt();
         System.out.println(UUID.randomUUID());
         Event event = new Event();
-        event.setId(uuid);
-        event.setCreateTime(new Date());
         ObjectMapper mapper = new ObjectMapper();
         try {
             mapper.writeValue(new File("file.JsonConverter"), event);
