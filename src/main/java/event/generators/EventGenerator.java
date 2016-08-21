@@ -6,11 +6,12 @@ import event.enums.*;
 
 import java.util.Date;
 import java.util.Random;
+import java.util.TimerTask;
 
 /**
  * Created by Николай on 21.08.2016.
  */
-public class EventGenerator implements Runnable {
+public class EventGenerator extends TimerTask implements Runnable {
     private Random random = new Random();
     Listener listener;
 
@@ -77,6 +78,6 @@ public class EventGenerator implements Runnable {
         return (random.nextInt(maxSS - minSS) + 1)*1000L;
     }
     private String randomAgentId(){
-        return String.format("Agent_%3d",random.nextInt(999) + 1);
+        return String.format("Agent_%03d",random.nextInt(999) + 1);
     }
 }
