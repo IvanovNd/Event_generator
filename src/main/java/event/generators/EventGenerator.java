@@ -45,7 +45,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
         notifyObservers(event);
         try {
             long millis = randomTimeSleep(3, 10);
-            System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " Join Sleep " + millis / 1000);
+            logger.debug("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " Join Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             logger.warn(e);
@@ -57,7 +57,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
         notifyObservers(event);
         try {
             long millis = randomTimeSleep(15, 20);
-            System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " END Sleep " + millis / 1000);
+            logger.debug("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " END Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             logger.warn(e);
@@ -67,7 +67,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
         event.setEndTime(event.getEventTimeStamp());
         event.setEndReason(randomEndReason().getName());
         notifyObservers(event);
-        System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " finished");
+        logger.debug("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " is finished");
     }
 
     private ServiceType randomServiceType() {
