@@ -17,7 +17,7 @@ public class DateAdapter extends TypeAdapter<Date> {
     /**
      * The Dateformat.
      */
-    static final String DATEFORMAT = "YYYY-MM-DD'T' HH:mm:ss.SSS";
+    static final String DATEFORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
     public Date read(JsonReader reader) throws IOException {
         throw new UnsupportedOperationException("read is not supported");

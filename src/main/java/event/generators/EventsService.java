@@ -44,7 +44,7 @@ public class EventsService {
      * @throws IOException the io exception
      */
     public EventsService(File file, Integer countOfEvents, Integer countPerSecond) throws IOException {
-        this(new FileWriter(file, true), countOfEvents, countPerSecond);
+        this(new FileWriter(file), countOfEvents, countPerSecond);
     }
 
     /**
@@ -56,7 +56,7 @@ public class EventsService {
      * @throws IOException the io exception
      */
     public EventsService(String fileName, Integer countOfEvents, Integer countPerSecond) throws IOException {
-        this(new FileWriter(new File(fileName), true), countOfEvents, countPerSecond);
+        this(new FileWriter(new File(fileName)), countOfEvents, countPerSecond);
     }
 
     /**
