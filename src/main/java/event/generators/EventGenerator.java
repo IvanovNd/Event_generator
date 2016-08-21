@@ -57,7 +57,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
         event.setAgentId(randomAgentId());
         notifyObservers(event);
         try {
-            long millis = randomTimeSleep(15, 16);
+            long millis = randomTimeSleep(15, 60);
             logger.debug("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " END Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
