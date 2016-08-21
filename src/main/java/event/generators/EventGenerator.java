@@ -37,6 +37,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
     @Override
     public void run() {
         Event event = new Event();
+        logger.debug("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " Star");
         event.setEventType(EventType.START.getName());
         event.setEventTimeStamp(event.getCreateTime());
         event.setServiceType(randomServiceType().getName());
@@ -56,7 +57,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
         event.setAgentId(randomAgentId());
         notifyObservers(event);
         try {
-            long millis = randomTimeSleep(15, 20);
+            long millis = randomTimeSleep(15, 60);
             logger.debug("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " END Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
