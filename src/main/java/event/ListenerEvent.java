@@ -13,7 +13,7 @@ import java.io.Writer;
  */
 public class ListenerEvent implements Listener {
     private Writer writer;
-
+    private Gson gson;
 
     /**
      * Instantiates a new Listener event.
@@ -22,12 +22,22 @@ public class ListenerEvent implements Listener {
      */
     public ListenerEvent(Writer writer) {
         this.writer = writer;
+        this.gson = new GsonBuilder().registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
+    }
+
+    /**
+     * Instantiates a new Listener event.
+     *
+     * @param writer the writer
+     * @param gson   the gson
+     */
+    public ListenerEvent(Writer writer, Gson gson) {
+        this.writer = writer;
+        this.gson = gson;
     }
 
     @Override
     public synchronized void writeEventToJSON(Event event) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
         gson.toJson(event);
         try {
             writer.write(gson.toJson(event));
