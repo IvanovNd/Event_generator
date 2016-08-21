@@ -1,11 +1,21 @@
 package event.enums;
 
+
 /**
- * Created by Николай on 20.08.2016.
+ * The enum Origination channel.
  */
 public enum OriginationChannel {
+    /**
+     * Webchat origination channel.
+     */
     WEBCHAT("webchat"),
+    /**
+     * Sms origination channel.
+     */
     SMS("sms"),
+    /**
+     * Wechat origination channel.
+     */
     WECHAT("wechat");
     private String name;
 

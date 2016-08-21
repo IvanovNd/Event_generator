@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by Николай on 20.08.2016.
+ * The type Event.
  */
 public class Event {
     private UUID id;
@@ -22,8 +22,16 @@ public class Event {
     private String endReason;
     private String originationChannel;
 
+    /**
+     * The Listener.
+     */
     Listener listener;
 
+    /**
+     * Instantiates a new Event.
+     *
+     * @param listener the listener
+     */
     public Event(Listener listener) {
         this.id = UUID.randomUUID();
         this.createTime = new Date();
@@ -110,7 +118,11 @@ public class Event {
     public void setOriginationChannel(String originationChannel) {
         this.originationChannel = originationChannel;
     }
+
+    /**
+     * Notify the listener.
+     */
     public void notifyListener(){
-        listener.event(this);
+        listener.writeEventToJSON(this);
     }
 }

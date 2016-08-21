@@ -1,8 +1,15 @@
 package event;
 
+
 /**
- * Created by Николай on 21.08.2016.
+ * The interface Listener.
  */
 public interface Listener {
-    public void event(Event event);
+
+    /**
+     * Write event to json.
+     *
+     * @param event the event
+     */
+    public void writeEventToJSON(Event event);
 }

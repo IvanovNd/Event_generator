@@ -1,7 +1,8 @@
 package event.enums;
 
+
 /**
- * Created by Николай on 20.08.2016.
+ * The enum End reason.
  */
 public enum EndReason {
     /**
@@ -19,11 +20,6 @@ public enum EndReason {
         this.name = name;
     }
 
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
     public String getName() {
         return name;
     }

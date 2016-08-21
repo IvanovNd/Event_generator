@@ -1,11 +1,21 @@
 package event.enums;
 
+
 /**
- * Created by Николай on 20.08.2016.
+ * The enum Origination page.
  */
 public enum OriginationPage {
+    /**
+     * Login origination page.
+     */
     LOGIN("login"),
+    /**
+     * Balance origination page.
+     */
     BALANCE("balance"),
+    /**
+     * Transfer origination page.
+     */
     TRANSFER("transfer");
 
     private String name;

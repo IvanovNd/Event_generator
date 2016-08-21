@@ -8,13 +8,22 @@ import java.util.Date;
 import java.util.Random;
 import java.util.TimerTask;
 
+
 /**
- * Created by Николай on 21.08.2016.
+ * The type Event generator.
  */
 public class EventGenerator extends TimerTask implements Runnable {
     private Random random = new Random();
+    /**
+     * The Listener.
+     */
     Listener listener;
 
+    /**
+     * Instantiates a new Event generator.
+     *
+     * @param listener the listener
+     */
     public EventGenerator(Listener listener) {
         this.listener = listener;
     }

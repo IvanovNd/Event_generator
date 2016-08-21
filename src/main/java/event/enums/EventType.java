@@ -1,11 +1,21 @@
 package event.enums;
 
+
 /**
- * Created by Николай on 20.08.2016.
+ * The enum Event type.
  */
 public enum EventType {
+    /**
+     * Start writeEventToJSON type.
+     */
     START("start"),
+    /**
+     * Join writeEventToJSON type.
+     */
     JOIN("join"),
+    /**
+     * End writeEventToJSON type.
+     */
     END("end");
 
     private String name;

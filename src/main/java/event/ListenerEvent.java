@@ -7,18 +7,25 @@ import event.json.NullStringToEmptyAdapterFactory;
 import java.io.IOException;
 import java.io.Writer;
 
+
 /**
- * Created by Николай on 21.08.2016.
+ * The type Listener event.
  */
 public class ListenerEvent implements Listener {
     private Writer writer;
 
+
+    /**
+     * Instantiates a new Listener event.
+     *
+     * @param writer the writer
+     */
     public ListenerEvent(Writer writer) {
         this.writer = writer;
     }
 
     @Override
-    public synchronized void event(Event event) {
+    public synchronized void writeEventToJSON(Event event) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
         gson.toJson(event);
