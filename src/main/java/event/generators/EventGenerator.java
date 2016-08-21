@@ -1,45 +1,48 @@
 package event.generators;
 
 import event.Event;
-import event.Listener;
+import event.observer.ObservableEvent;
+import event.observer.Observer;
 import event.enums.*;
 
-import java.util.Date;
-import java.util.Random;
-import java.util.TimerTask;
+import java.util.*;
 
 
 /**
  * The type Event generator.
  */
-public class EventGenerator extends TimerTask implements Runnable {
+public class EventGenerator extends TimerTask implements Runnable, ObservableEvent {
     private Random random = new Random();
     /**
-     * The Listener.
+     * The Observer.
      */
-    Listener listener;
+    private List<Observer> observers = new ArrayList<>();
+
+    public EventGenerator() {
+    }
+
 
     /**
      * Instantiates a new Event generator.
      *
-     * @param listener the listener
+     * @param observers the observers
      */
-    public EventGenerator(Listener listener) {
-        this.listener = listener;
+    public EventGenerator(List<Observer> observers) {
+        this.observers = observers;
     }
 
     @Override
     public void run() {
-        Event event = new Event(listener);
+        Event event = new Event();
         event.setEventType(EventType.START.getName());
         event.setEventTimeStamp(event.getCreateTime());
         event.setServiceType(randomServiceType().getName());
         event.setOriginationPage(randomOriginationPage().getName());
         event.setOriginationChannel(randomOriginationChannel().getName());
-        event.notifyListener();
+        notifyObservers(event);
         try {
             long millis = randomTimeSleep(3, 10);
-            System.out.println("Thread "+Thread.currentThread().getName()+"Join Sleep "+millis/1000);
+            System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " Join Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
 
@@ -49,10 +52,10 @@ public class EventGenerator extends TimerTask implements Runnable {
         event.setEventTimeStamp(new Date());
         event.setDeliveryTime(event.getEventTimeStamp());
         event.setAgentId(randomAgentId());
-        event.notifyListener();
+        notifyObservers(event);
         try {
             long millis = randomTimeSleep(15, 20);
-            System.out.print("END Sleep "+millis/1000);
+            System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " END Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -61,7 +64,8 @@ public class EventGenerator extends TimerTask implements Runnable {
         event.setEventTimeStamp(new Date());
         event.setEndTime(event.getEventTimeStamp());
         event.setEndReason(randomEndReason().getName());
-        event.notifyListener();
+        notifyObservers(event);
+        System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " finished");
     }
 
     private ServiceType randomServiceType() {
@@ -78,15 +82,34 @@ public class EventGenerator extends TimerTask implements Runnable {
         OriginationChannel[] values = OriginationChannel.values();
         return values[random.nextInt(values.length)];
     }
+
     private EndReason randomEndReason() {
         EndReason[] values = EndReason.values();
         return values[random.nextInt(values.length)];
     }
 
     private long randomTimeSleep(int minSS, int maxSS) {
-        return (random.nextInt(maxSS - minSS) + 1)*1000L;
+        return (random.nextInt(maxSS - minSS) + 1) * 1000L;
     }
-    private String randomAgentId(){
-        return String.format("Agent_%03d",random.nextInt(999) + 1);
+
+    private String randomAgentId() {
+        return String.format("Agent_%03d", random.nextInt(999) + 1);
+    }
+
+    @Override
+    public void registerObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void removeObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers(Event event) {
+        for (Observer observer : observers) {
+            observer.writeEventToJSON(event);
+        }
     }
 }

@@ -1,10 +1,12 @@
-package event;
+package event.observer;
 
+
+import event.Event;
 
 /**
- * The interface Listener.
+ * The interface Observer.
  */
-public interface Listener {
+public interface Observer {
 
     /**
      * Write event to json.
