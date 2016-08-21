@@ -22,10 +22,13 @@ public class Event {
     private String endReason;
     private String originationChannel;
 
-    public Event() {
+    Listener listener;
+
+    public Event(Listener listener) {
         this.id = UUID.randomUUID();
-        this.eventType = EventType.START.name();
         this.createTime = new Date();
+        this.listener = listener;
+        this.eventType = EventType.START.name();
     }
 
     public UUID getId() {
@@ -106,5 +109,8 @@ public class Event {
 
     public void setOriginationChannel(String originationChannel) {
         this.originationChannel = originationChannel;
+    }
+    public void notifyListener(){
+        listener.event(this);
     }
 }

@@ -1,44 +1,24 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import event.Event;
-import event.json.NullStringToEmptyAdapterFactory;
+import event.Listener;
+import event.ListenerEvent;
+import event.generators.EventGenerator;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.util.Random;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Николай on 20.08.2016.
  */
 public class Main {
     public static void main(String[] args) {
-        UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
-        System.out.println(UUID.randomUUID());
-        System.out.println(UUID.randomUUID());
-        Random random = new Random(4);
-        random.nextInt();
-        System.out.println(UUID.randomUUID());
-        Event event = new Event();
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            mapper.writeValue(new File("file.JsonConverter"), event);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Listener listener = new ListenerEvent();
+        List<EventGenerator> eventGenerators = new ArrayList<>();
+        for (int i = 0; i <10; i++) {
+            eventGenerators.add(new EventGenerator(listener));
         }
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.registerTypeAdapterFactory(new NullStringToEmptyAdapterFactory()).create();
-        gson.toJson(event);
-        try {
-            Writer writer = new FileWriter(new File("file.json"));
-            writer.write(gson.toJson(event));
-            writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (EventGenerator eventGenerator : eventGenerators) {
+            Thread thread = new Thread(eventGenerator);
+            thread.start();
         }
+
     }
 }
