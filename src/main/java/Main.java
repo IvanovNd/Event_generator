@@ -31,7 +31,7 @@ public class Main {
                 EventGenerator eventGenerator = new EventGenerator();
                 eventGenerator.registerObserver(observer);
                 scheduledExecutorService.schedule(eventGenerator, delay, TimeUnit.SECONDS);
-                logger.error("Thread started " + events + " delay " + delay+TimeUnit.SECONDS);
+                logger.warn("Thread started " + events + " delay " + delay+TimeUnit.SECONDS);
                 System.out.println("Thread started " + events + " delay " + delay+TimeUnit.SECONDS );
                 if(events%countPerSecond == 0) {
                     delay++;
