@@ -1,6 +1,8 @@
 import event.generators.EventGenerator;
 import event.observer.Observer;
 import event.observer.ObserverEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -16,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Николай on 20.08.2016.
  */
 public class Main {
+    private static final Logger logger = LogManager.getLogger(Main.class);
     public static void main(String[] args) throws IOException {
         if (args.length == 2) {
             Integer countOfEvents = Integer.valueOf(args[0]);
@@ -28,6 +31,7 @@ public class Main {
                 EventGenerator eventGenerator = new EventGenerator();
                 eventGenerator.registerObserver(observer);
                 scheduledExecutorService.schedule(eventGenerator, delay, TimeUnit.SECONDS);
+                logger.error("Thread started " + events + " delay " + delay+TimeUnit.SECONDS);
                 System.out.println("Thread started " + events + " delay " + delay+TimeUnit.SECONDS );
                 if(events%countPerSecond == 0) {
                     delay++;

@@ -4,6 +4,8 @@ import event.Event;
 import event.observer.ObservableEvent;
 import event.observer.Observer;
 import event.enums.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
@@ -12,6 +14,7 @@ import java.util.*;
  * The type Event generator.
  */
 public class EventGenerator extends TimerTask implements Runnable, ObservableEvent {
+    private static final Logger logger = LogManager.getLogger(EventGenerator.class);
     private Random random = new Random();
     /**
      * The Observer.
@@ -45,8 +48,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
             System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " Join Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-
-            e.printStackTrace();
+            logger.warn(e);
         }
         event.setEventType(EventType.JOIN.getName());
         event.setEventTimeStamp(new Date());
@@ -58,7 +60,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
             System.out.println("Thread " + Thread.currentThread().getName()+ " id "+Thread.currentThread().getId() + " END Sleep " + millis / 1000);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.warn(e);
         }
         event.setEventType(EventType.END.getName());
         event.setEventTimeStamp(new Date());
