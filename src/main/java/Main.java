@@ -41,6 +41,7 @@ public class Main {
             for (int i = 0; i < 1000; i++) {
                 EventGenerator eventGenerator = new EventGenerator();
                 eventGenerator.registerObserver(observer);
+                eventGenerators.add(eventGenerator);
             }
             for (EventGenerator eventGenerator : eventGenerators) {
                 Thread thread = new Thread(eventGenerator);
