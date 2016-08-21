@@ -4,7 +4,13 @@ package event.enums;
  * Created by Николай on 20.08.2016.
  */
 public enum EndReason {
+    /**
+     * Normal end reason.
+     */
     NORMAL("Normal"),
+    /**
+     * Abnormal end reason.
+     */
     ABNORMAL("Abnormal");
 
     private String name;
@@ -13,6 +19,11 @@ public enum EndReason {
         this.name = name;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
