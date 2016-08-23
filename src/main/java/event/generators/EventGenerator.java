@@ -92,7 +92,7 @@ public class EventGenerator extends TimerTask implements Runnable, ObservableEve
     }
 
     private long randomTimeSleep(int minSS, int maxSS) {
-        return (random.nextInt(maxSS - minSS) + 1) * 1000L;
+        return (random.nextInt(maxSS - minSS) + minSS) * 1000L;
     }
 
     private String randomAgentId() {
